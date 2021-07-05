@@ -1,0 +1,14 @@
+1st byte: int 0 to indicate start of level info
+2nd: int with level id, int with level type
+3rd: int 1 to indicate enemy info is following
+4th: int with enemy type
+
+1st: int to indicate type of data
+
+0: LEVEL INFO
+-int level id
+-int level type
+
+1: ENEMY INFO
+-int enemy type
+-float spawn interval
