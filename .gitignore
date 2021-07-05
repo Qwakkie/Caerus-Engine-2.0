@@ -1,13 +1,13 @@
 # Build and .vs Engine
-Caerus\ Engine/.vs
-Caerus\ Engine/Minigin/x64
-Caerus\ Engine/Minigin/x84
-Caerus\ Engine/Minigin/Win32
-Caerus\ Engine/Win32
-Caerus\ Engine/x64
-Caerus\ Engine/x86
+CaerusEngine/.vs
+CaerusEngine/Minigin/x64
+CaerusEngine/Minigin/x84
+CaerusEngine/Minigin/Win32
+CaerusEngine/Win32
+CaerusEngine/x64
+CaerusEngine/x86
 
 # Build for Game
-Caerus\ Engine/QbertGame/x64
-Caerus\ Engine/QbertGame/x86
-Caerus\ Engine/QbertGame/Win32
+CaerusEngine/QbertGame/x64
+CaerusEngine/QbertGame/x86
+CaerusEngine/QbertGame/Win32
