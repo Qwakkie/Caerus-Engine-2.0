@@ -131,7 +131,7 @@ void GameObject::AddObserver(Observer* pObserver)
 
 void GameObject::RemoveObserver(Observer* pObserver)
 {
-	for (int i{}; i < m_pObservers.size(); ++i)
+	for (size_t i{}; i < m_pObservers.size(); ++i)
 	{
 		if(pObserver == m_pObservers[i])
 		{

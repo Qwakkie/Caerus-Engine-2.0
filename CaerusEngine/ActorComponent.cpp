@@ -4,17 +4,13 @@
 
 #include "GameObject.h"
 #include "TransformComponent.h"
-#include "../QbertGame/FiniteStateMachine.h"
 
 ActorComponent::~ActorComponent()
 {
-	delete m_pStateMachine;
 }
 
 void ActorComponent::Initialize()
 {
-	m_pStateMachine = new FiniteStateMachine();
-	m_pParent->AddObserver(m_pStateMachine);
 	m_pParent->Notify(Event::ACTOR_CREATED);
 }
 
