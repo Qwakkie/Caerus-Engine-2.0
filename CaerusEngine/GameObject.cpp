@@ -9,9 +9,7 @@ GameObject::GameObject()
 }
 
 GameObject::~GameObject()
-{
-	m_pObservers.clear();
-	
+{	
 	for (auto*& pComponent : m_pComponents)
 	{
 		delete pComponent;
@@ -107,11 +105,6 @@ void GameObject::SetScene(Scene* pScene)
 	m_pScene = pScene;
 }
 
-const std::vector<GameObject*>& GameObject::GetChildren()const
-{
-	return m_pChildren;
-}
-
 GameObject* GameObject::GetParent()const
 {
 	return m_pParent;
@@ -122,31 +115,6 @@ Scene* GameObject::GetScene() const
 	if (m_pParent)
 		return m_pParent->GetScene();
 	return m_pScene;
-}
-
-void GameObject::AddObserver(Observer* pObserver)
-{
-	m_pObservers.push_back(pObserver);
-}
-
-void GameObject::RemoveObserver(Observer* pObserver)
-{
-	for (size_t i{}; i < m_pObservers.size(); ++i)
-	{
-		if(pObserver == m_pObservers[i])
-		{
-			m_pObservers.erase(m_pObservers.begin() + i);
-			m_pObservers.pop_back();
-		}
-	}
-}
-
-void GameObject::Notify(Event event)
-{
-	for (auto* pObserver : m_pObservers)
-	{
-		pObserver->Notify(this, event);
-	}
 }
 
 void GameObject::MarkForDelete()

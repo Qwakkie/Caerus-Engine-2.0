@@ -2,8 +2,6 @@
 #pragma warning(push)
 #pragma warning (disable:4201)
 #include <glm/vec3.hpp>
-
-#include "Observer.h"
 #pragma warning(pop)
 #include <string>
 
@@ -22,13 +20,8 @@ public:
 	void AddComponent(Component*);
 	void AddChild(GameObject*);
 	void SetScene(Scene*);
-	[[nodiscard]] const std::vector<GameObject*>& GetChildren()const;
 	[[nodiscard]] GameObject* GetParent()const;
 	[[nodiscard]] Scene* GetScene()const;
-
-	void AddObserver(Observer*);
-	void RemoveObserver(Observer*);
-	void Notify(Event event);
 
 	void MarkForDelete();
 	void DeleteMarkedChildren();
@@ -65,7 +58,6 @@ private:
 	std::string m_Tag{};
 	std::vector<Component*> m_pComponents{};
 	std::vector<GameObject*> m_pChildren{};
-	std::vector<Observer*> m_pObservers{};
 	GameObject* m_pParent{};
 	Scene* m_pScene{};
 	bool m_IsInitialized{};
