@@ -9,6 +9,12 @@ class TransformComponent final : public Component
 {
 public:
 	TransformComponent();
+
+	~TransformComponent() = default;
+	TransformComponent(const TransformComponent&) = default;
+	TransformComponent(TransformComponent&&) = default;
+	TransformComponent& operator=(const TransformComponent&) = default;
+	TransformComponent& operator=(TransformComponent&&) = default;
 	
 	void LateUpdate() override;
 	

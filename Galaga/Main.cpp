@@ -1,6 +1,7 @@
 #include "ActorComponent.h"
 #include "AnimatorComponent.h"
 #include "CaerusEngine.h"
+#include "FireCommand.h"
 #include "GameObject.h"
 #include "InputComponent.h"
 #include "MoveLeftCommand.h"
@@ -28,6 +29,7 @@ void LoadGame(CaerusEngine&)
 	auto* pTexture{ new TextureComponent("../Resources/Player.png") };
 	pPlayer->AddComponent(pTexture);
 	pPlayer->GetTransform()->SetScale(.5f);
+	pPlayer->GetTransform()->Translate({ 100.f, 0.f, 100.f });
 	
 	const int spriteAmount{ 8 };
 	auto* pAnimator{ new AnimatorComponent(pTexture, spriteAmount, 1) };
@@ -35,12 +37,11 @@ void LoadGame(CaerusEngine&)
 	pPlayer->AddComponent(pAnimator);
 
 	auto* pInput{ new InputComponent() };
-	auto* pRightCommand{ new MoveRightCommand() };
-	auto* pLeftCommand{ new MoveLeftCommand() };
-	pInput->AddCommand(TriggerState::Down, ControllerButton::ButtonRight, VK_RIGHT, pRightCommand);
-	pInput->AddCommand(TriggerState::Down, ControllerButton::ButtonLeft, VK_LEFT, pLeftCommand);
-	pInput->AddCommand(TriggerState::Released, ControllerButton::ButtonRight, VK_RIGHT, pLeftCommand);
-	pInput->AddCommand(TriggerState::Released, ControllerButton::ButtonLeft, VK_LEFT, pRightCommand);
+	pInput->AddCommand(TriggerState::Down, ControllerButton::ButtonRight, VK_RIGHT, new MoveRightCommand());
+	pInput->AddCommand(TriggerState::Down, ControllerButton::ButtonLeft, VK_LEFT, new MoveLeftCommand());
+	pInput->AddCommand(TriggerState::Released, ControllerButton::ButtonRight, VK_RIGHT, new MoveLeftCommand());
+	pInput->AddCommand(TriggerState::Released, ControllerButton::ButtonLeft, VK_LEFT, new MoveRightCommand());
+	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonRightThumb, VK_SPACE, new FireCommand());
 	pPlayer->AddComponent(pInput);
 
 	pPlayer->AddComponent(new ActorComponent());

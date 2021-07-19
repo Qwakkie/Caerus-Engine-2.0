@@ -38,6 +38,7 @@ enum class TriggerState
 
 struct InputAction
 {
+	int id;
 	TriggerState state;
 	ControllerButton button;
 	int key;
@@ -45,7 +46,7 @@ struct InputAction
 
 inline bool operator<(InputAction left, InputAction right)
 {
-	return (static_cast<int>(left.button) + left.key) < (static_cast<int>(right.button) + right.key);
+	return left.id < right.id;
 }
 
 class InputManager final : public Singleton<InputManager>

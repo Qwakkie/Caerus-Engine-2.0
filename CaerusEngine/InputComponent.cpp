@@ -9,7 +9,6 @@ InputComponent::~InputComponent()
 		delete pair.second;
 }
 
-
 void InputComponent::Update(float)
 {
 	const InputManager& input{ InputManager::GetInstance() };
@@ -22,5 +21,6 @@ void InputComponent::Update(float)
 
 void InputComponent::AddCommand(TriggerState state, ControllerButton button, int key, Command* pCommand)
 {
-	m_pActions[{state, button, key}] = pCommand;
+	m_pActions[{m_ActionAmount, state, button, key}] = pCommand;
+	++m_ActionAmount;
 }

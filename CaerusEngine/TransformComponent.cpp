@@ -64,10 +64,11 @@ void TransformComponent::Translate(const glm::vec3& translation)
 
 void TransformComponent::SetFlags()
 {
-	auto pChildren{ m_pParent->GetChildren() };
-	for(size_t i{}; i<pChildren.size(); ++i)
-	{
-		pChildren[i]->GetTransform()->SetFlags();
-	}
+	//TODO: FIX THIS FUNCTION
+	//auto pChildren{ m_pParent->GetChildren() };
+	//for(size_t i{}; i<pChildren.size(); ++i)
+	//{
+	//	pChildren[i]->GetTransform()->SetFlags();
+	//}
 	SetDirtyFlag();
 }

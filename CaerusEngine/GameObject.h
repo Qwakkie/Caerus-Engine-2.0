@@ -1,8 +1,6 @@
 #pragma once
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include <glm/vec3.hpp>
-#pragma warning(pop)
+#include <vector>
+#include <typeinfo>
 #include <string>
 
 class Scene;
@@ -46,7 +44,7 @@ public:
 
 	GameObject();
 	~GameObject();
-	GameObject(const GameObject& other) = delete;
+	GameObject(const GameObject& other);
 	GameObject(GameObject&& other) = delete;
 	GameObject& operator=(const GameObject& other) = delete;
 	GameObject& operator=(GameObject&& other) = delete;

@@ -21,5 +21,6 @@ public:
 	void AddCommand(TriggerState, ControllerButton, int, Command*);
 private:
 	std::map<InputAction, Command*> m_pActions{};
+	int m_ActionAmount{};
 };
 
