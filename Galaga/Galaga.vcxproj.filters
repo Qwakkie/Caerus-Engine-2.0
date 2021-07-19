@@ -28,7 +28,7 @@
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="FireCommand.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +39,7 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="FireCommand.h">
-      <Filter>Header Files</Filter>
+      <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

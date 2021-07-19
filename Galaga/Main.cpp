@@ -29,7 +29,7 @@ void LoadGame(CaerusEngine&)
 	auto* pTexture{ new TextureComponent("../Resources/Player.png") };
 	pPlayer->AddComponent(pTexture);
 	pPlayer->GetTransform()->SetScale(.5f);
-	pPlayer->GetTransform()->Translate({ 100.f, 0.f, 100.f });
+	pPlayer->GetTransform()->Translate({ 200.f, 400.f, 0.f });
 	
 	const int spriteAmount{ 8 };
 	auto* pAnimator{ new AnimatorComponent(pTexture, spriteAmount, 1) };
@@ -37,8 +37,8 @@ void LoadGame(CaerusEngine&)
 	pPlayer->AddComponent(pAnimator);
 
 	auto* pInput{ new InputComponent() };
-	pInput->AddCommand(TriggerState::Down, ControllerButton::ButtonRight, VK_RIGHT, new MoveRightCommand());
-	pInput->AddCommand(TriggerState::Down, ControllerButton::ButtonLeft, VK_LEFT, new MoveLeftCommand());
+	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonRight, VK_RIGHT, new MoveRightCommand());
+	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonLeft, VK_LEFT, new MoveLeftCommand());
 	pInput->AddCommand(TriggerState::Released, ControllerButton::ButtonRight, VK_RIGHT, new MoveLeftCommand());
 	pInput->AddCommand(TriggerState::Released, ControllerButton::ButtonLeft, VK_LEFT, new MoveRightCommand());
 	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonRightThumb, VK_SPACE, new FireCommand());
