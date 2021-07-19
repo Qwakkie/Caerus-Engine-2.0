@@ -4,16 +4,18 @@
 #include "GameObject.h"
 #include "TextureComponent.h"
 
-AnimatorComponent::AnimatorComponent(int cols, int rows)
-	:m_Cols(cols)
+AnimatorComponent::AnimatorComponent(TextureComponent* pTexture, int cols, int rows)
+	:m_pTextureComponent(pTexture)
+	,m_Cols(cols)
 	,m_Rows(rows)
 {
+	m_SpriteSize = m_pTextureComponent->GetSourceRect();
+	m_SpriteSize.w /= cols;
+	m_SpriteSize.h /= rows;
 }
 
 void AnimatorComponent::Initialize()
 {
-	m_pTextureComponent = m_pParent->GetComponent<TextureComponent>();
-	m_SpriteSize = m_pTextureComponent->GetSourceRect();
 	SetSprite(m_CurrentSprite);
 }
 

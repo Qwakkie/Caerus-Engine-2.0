@@ -34,7 +34,9 @@ void TextureComponent::Render()const
 	const int x{ static_cast<int>(pos.x + m_OffsetX) };
 	const int y{ static_cast<int>(pos.y + m_OffsetY) };
 	const glm::vec3 scale{ m_pParent->GetTransform()->GetWorldScale() };
-	const SDL_Rect destination{ x, y, m_SourceRect.w * static_cast<int>(scale.x), m_SourceRect.h * static_cast<int>(scale.y) };
+	const float width{ static_cast<float>(m_SourceRect.w) * scale.x };
+	const float height{ static_cast<float>(m_SourceRect.h) * scale.y };
+	const SDL_Rect destination{ x, y, static_cast<int>(width),  static_cast<int>(height)};
 	Renderer::GetInstance().RenderTexture(m_pTexture->pTexture, destination, m_SourceRect);
 }
 

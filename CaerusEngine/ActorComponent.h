@@ -12,24 +12,13 @@ class ActorComponent final : public Component
 {
 public:
 	ActorComponent() = default;
-	~ActorComponent();
-
-	ActorComponent(ActorComponent&) = delete;
-	ActorComponent(ActorComponent&&) = delete;
-	ActorComponent operator=(ActorComponent&) = delete;
-	ActorComponent operator=(ActorComponent&&) = delete;
 	
-	void Initialize()override;
 	void Update(float)override;
-	void Jump(glm::vec2);
-	void Die(bool moveRight);
+
+	void AddVelocity(float x, float y);
+	float GetMaxSpeed()const { return m_MaxSpeed; }
 private:
-	Observer* m_pStateMachine{};
-	glm::vec2 m_StartPoint{};
-	glm::vec2 m_Destination{};
-	float m_JumpTime{.5f};
-	float m_CurrentJumpTime{};
-	bool m_IsJumping{ false };
-	bool m_IsDying{ false };
+	glm::vec2 m_Velocity{};
+	float m_MaxSpeed{ 50.f };
 };
 

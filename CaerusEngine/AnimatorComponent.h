@@ -10,7 +10,7 @@ class TextureComponent;
 class AnimatorComponent final: public Component
 {
 public:
-	AnimatorComponent(int cols, int rows);
+	AnimatorComponent(TextureComponent*, int cols, int rows);
 	void Initialize() override;
 	void Update(float) override;
 
