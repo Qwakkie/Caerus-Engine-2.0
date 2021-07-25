@@ -15,7 +15,8 @@ public:
 	TransformComponent(TransformComponent&&) = default;
 	TransformComponent& operator=(const TransformComponent&) = default;
 	TransformComponent& operator=(TransformComponent&&) = default;
-	
+
+	void Initialize() override;
 	void LateUpdate() override;
 	
 	[[nodiscard]] const glm::vec3& GetPosition() const { return m_Position; }
@@ -30,6 +31,7 @@ public:
 	void Translate(const glm::vec3&);
 	void SetDirtyFlag() { m_UpdateFlag = true; }
 private:
+	void UpdateTransforms();
 	void SetFlags();
 	
 	glm::vec3 m_Position;

@@ -9,26 +9,16 @@ TransformComponent::TransformComponent()
 {
 }
 
+void TransformComponent::Initialize()
+{
+	UpdateTransforms();
+}
+
 void TransformComponent::LateUpdate()
 {
 	if (!m_UpdateFlag)
 		return;
-
-	if(!m_pParent->GetParent())
-	{
-		m_WorldPosition = m_Position;
-		m_WorldScale = m_Scale;
-		return;
-	}
-	
-	m_WorldPosition = (m_pParent->GetParent()->GetTransform()->GetPosition() + m_Position);
-	
-	const glm::vec3 parentScale{ m_pParent->GetParent()->GetTransform()->GetWorldScale() };
-	m_WorldScale.x = parentScale.x * m_Scale.x;
-	m_WorldScale.y = parentScale.y * m_Scale.y;
-	m_WorldScale.z = parentScale.z * m_Scale.z;
-
-	m_UpdateFlag = false;
+	UpdateTransforms();
 }
 
 void TransformComponent::SetPosition(const glm::vec3& position)
@@ -60,6 +50,25 @@ void TransformComponent::Translate(const glm::vec3& translation)
 {
 	m_Position += translation;
 	SetFlags();
+}
+
+void TransformComponent::UpdateTransforms()
+{
+	if (!m_pParent->GetParent())
+	{
+		m_WorldPosition = m_Position;
+		m_WorldScale = m_Scale;
+		return;
+	}
+
+	m_WorldPosition = (m_pParent->GetParent()->GetTransform()->GetPosition() + m_Position);
+
+	const glm::vec3 parentScale{ m_pParent->GetParent()->GetTransform()->GetWorldScale() };
+	m_WorldScale.x = parentScale.x * m_Scale.x;
+	m_WorldScale.y = parentScale.y * m_Scale.y;
+	m_WorldScale.z = parentScale.z * m_Scale.z;
+
+	m_UpdateFlag = false;
 }
 
 void TransformComponent::SetFlags()

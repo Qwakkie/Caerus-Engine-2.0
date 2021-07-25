@@ -17,6 +17,8 @@ Scene::~Scene()
 
 void Scene::Add(GameObject* object)
 {
+	if (m_IsInitialized)
+		object->Initialize();
 	m_Objects.push_back(object);
 	object->SetScene(this);
 }
@@ -32,9 +34,9 @@ void Scene::Initialize()
 
 void Scene::Update(float deltaTime)
 {
-	for(auto* object : m_Objects)
+	for (size_t i{}; i < m_Objects.size(); ++i)
 	{
-		object->Update(deltaTime);
+		m_Objects[i]->Update(deltaTime);
 	}
 
 	for (auto* object : m_Objects)

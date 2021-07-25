@@ -24,6 +24,8 @@ public:
 	void RenderTexture( SDL_Texture* pTexture, int x, int y, int width, int height) const;
 	void RenderTexture(SDL_Texture* pTexture, SDL_Rect destination, SDL_Rect source)const;
 
+	void RenderRectangle(SDL_Rect rectangle)const;
+
 	SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }
 private:
 	SDL_Renderer* m_Renderer{};

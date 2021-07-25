@@ -19,6 +19,6 @@ public:
 	float GetMaxSpeed()const { return m_MaxSpeed; }
 private:
 	glm::vec2 m_Velocity{};
-	float m_MaxSpeed{ 50.f };
+	float m_MaxSpeed{ 100.f };
 };
 

@@ -66,3 +66,10 @@ void Renderer::RenderTexture(struct SDL_Texture* pTexture, SDL_Rect destination,
 {
 	SDL_RenderCopy(GetSDLRenderer(), pTexture, &source, &destination);
 }
+
+void Renderer::RenderRectangle(SDL_Rect rectangle) const
+{
+	SDL_SetRenderDrawColor(GetSDLRenderer(), 255, 255, 255, 255);
+	SDL_RenderDrawRect(GetSDLRenderer(), &rectangle);
+	SDL_SetRenderDrawColor(GetSDLRenderer(), 0, 0, 0, 0);
+}

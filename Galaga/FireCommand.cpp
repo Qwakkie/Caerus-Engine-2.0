@@ -2,6 +2,7 @@
 
 
 #include "ActorComponent.h"
+#include "ColliderComponent.h"
 #include "GameObject.h"
 #include "Scene.h"
 #include "TextureComponent.h"
@@ -16,5 +17,6 @@ void FireCommand::Execute(GameObject* pActor)
 	const float speed{ pActorComponent->GetMaxSpeed() };
 	pActorComponent->AddVelocity(0, -speed);
 	pMissile->AddComponent(pActorComponent);
+	pMissile->AddComponent(new ColliderComponent(5.f, 10.f));
 	pActor->GetScene()->Add(pMissile);
 }

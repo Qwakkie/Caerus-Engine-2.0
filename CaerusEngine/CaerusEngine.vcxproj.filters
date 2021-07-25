@@ -43,6 +43,10 @@
     <ClCompile Include="ObserverComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionChecker.cpp" />
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioService.h" />
@@ -89,6 +93,10 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ObserverComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionChecker.h" />
+    <ClInclude Include="ColliderComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
