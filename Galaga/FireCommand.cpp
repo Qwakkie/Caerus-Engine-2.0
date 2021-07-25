@@ -17,6 +17,13 @@ void FireCommand::Execute(GameObject* pActor)
 	const float speed{ pActorComponent->GetMaxSpeed() };
 	pActorComponent->AddVelocity(0, -speed);
 	pMissile->AddComponent(pActorComponent);
-	pMissile->AddComponent(new ColliderComponent(5.f, 10.f));
+	auto* pCollider(new ColliderComponent(5.f, 10.f));
+	auto callback{
+		[](GameObject* pSelf) {pSelf->MarkForDelete(); }
+	};
+	pCollider->SetCallback(callback);
+	
+	pMissile->AddComponent(pCollider);
+	
 	pActor->GetScene()->Add(pMissile);
 }

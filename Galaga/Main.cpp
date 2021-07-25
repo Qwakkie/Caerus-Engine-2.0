@@ -54,19 +54,26 @@ void LoadGame(CaerusEngine&)
 	auto* pZako{ new GameObject() };
 	pTexture = new TextureComponent("../Resources/Zako.png");
 	pZako->AddComponent(pTexture);
+	pZako->GetTransform()->SetScale(.5f);
 
 	pAnimator = new AnimatorComponent(pTexture, spriteAmount, 1);
 	pAnimator->SetSprite(spriteAmount - 1);
 	pZako->AddComponent(pAnimator);
-	const float width{ 72.f };
-	const float height{ 64.f };
+	const float width{ 16.f };
+	const float height{ 16.f };
+
+	auto* pColliderObject{ new GameObject() };
+	pZako->AddChild(pColliderObject);
+	const glm::vec3 offset{ 12.f, 8.f, 0.f };
+	pColliderObject->GetTransform()->Translate(offset);
+	
 	auto* pCollider{ new ColliderComponent(width, height) };
-	auto enemyCallback{ [](GameObject*)
+	auto enemyCallback{ [](GameObject* pActor)
 	{
-			std::cout << "Enemy died";
+			pActor->GetParent()->MarkForDelete();
 	} };
 	pCollider->SetCallback(enemyCallback);
-	pZako->AddComponent(pCollider);
+	pColliderObject->AddComponent(pCollider);
 	
 	pScene->Add(pZako);
 	

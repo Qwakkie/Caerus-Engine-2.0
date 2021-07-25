@@ -44,13 +44,13 @@ void Scene::Update(float deltaTime)
 		object->LateUpdate();
 	}
 
-	for (auto* object : m_Objects)
+	for (size_t i{}; i < m_Objects.size(); ++i) 
 	{
-		object->DeleteMarkedChildren();
-		if (object->IsMarkedForDelete())
+		m_Objects[i]->DeleteMarkedChildren();
+		if (m_Objects[i]->IsMarkedForDelete())
 		{
-			delete object;
-			object = nullptr;
+			delete m_Objects[i];
+			m_Objects[i] = nullptr;
 		}
 	}
 

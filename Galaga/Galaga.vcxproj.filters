@@ -30,6 +30,9 @@
     <ClCompile Include="FireCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveLeftCommand.h">
@@ -40,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="FireCommand.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Scoreboard.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
