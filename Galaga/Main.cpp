@@ -11,6 +11,7 @@
 #include "MoveRightCommand.h"
 #include "Scene.h"
 #include "SceneManager.h"
+#include "Scoreboard.h"
 #include "TextureComponent.h"
 #include "TransformComponent.h"
 
@@ -28,12 +29,12 @@ void LoadGame(CaerusEngine&)
 {
 	auto* pScene{ new Scene("GameScene") };
 	auto* pPlayer{ new GameObject() };
-	
+
 	auto* pTexture{ new TextureComponent("../Resources/Player.png") };
 	pPlayer->AddComponent(pTexture);
 	pPlayer->GetTransform()->SetScale(.5f);
 	pPlayer->GetTransform()->Translate({ 200.f, 400.f, 0.f });
-	
+
 	const int spriteAmount{ 8 };
 	auto* pAnimator{ new AnimatorComponent(pTexture, spriteAmount, 1) };
 	pAnimator->SetSprite(spriteAmount - 1);
@@ -48,7 +49,7 @@ void LoadGame(CaerusEngine&)
 	pPlayer->AddComponent(pInput);
 
 	pPlayer->AddComponent(new ActorComponent());
-	
+
 	pScene->Add(pPlayer);
 
 	auto* pZako{ new GameObject() };
@@ -66,7 +67,7 @@ void LoadGame(CaerusEngine&)
 	pZako->AddChild(pColliderObject);
 	const glm::vec3 offset{ 12.f, 8.f, 0.f };
 	pColliderObject->GetTransform()->Translate(offset);
-	
+
 	auto* pCollider{ new ColliderComponent(width, height) };
 	auto enemyCallback{ [](GameObject* pActor)
 	{
@@ -74,8 +75,11 @@ void LoadGame(CaerusEngine&)
 	} };
 	pCollider->SetCallback(enemyCallback);
 	pColliderObject->AddComponent(pCollider);
-	
+
 	pScene->Add(pZako);
+
+	auto* pScoreboard{ new Scoreboard() };
+	pScene->Add(pScoreboard->GetView());
 	
 	SceneManager::GetInstance().AddScene(pScene);
 	SceneManager::GetInstance().SetActiveScene(0);
