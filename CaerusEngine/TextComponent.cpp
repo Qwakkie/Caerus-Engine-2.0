@@ -11,6 +11,7 @@ TextComponent::TextComponent(const std::string& text, Font* font)
 	, m_Text{ text }
 	, m_pFont{ font }
 	, m_pTextureComponent{ nullptr }
+	, m_Color{ 255, 255, 255 }
 {
 }
 
@@ -23,8 +24,7 @@ void TextComponent::Update(float)
 {
 	if (m_NeedsUpdate)
 	{
-		const SDL_Color color = { 255,255,255 }; // only white text is supported now
-		const auto surf = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), color);
+		const auto surf = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), m_Color);
 		if (surf == nullptr)
 		{
 			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
@@ -44,4 +44,9 @@ void TextComponent::SetText(const std::string& text)
 {
 	m_Text = text;
 	m_NeedsUpdate = true;
+}
+
+void TextComponent::SetColor(SDL_Color color)
+{
+	m_Color = color;
 }
