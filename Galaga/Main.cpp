@@ -7,6 +7,7 @@
 #include "FireCommand.h"
 #include "GameObject.h"
 #include "InputComponent.h"
+#include "LivesCounter.h"
 #include "MoveLeftCommand.h"
 #include "MoveRightCommand.h"
 #include "Scene.h"
@@ -80,6 +81,9 @@ void LoadGame(CaerusEngine&)
 
 	auto* pScoreboard{ new Scoreboard() };
 	pScene->Add(pScoreboard->GetView());
+
+	auto* pLivesCounter{ new LivesCounter() };
+	pScene->Add(pLivesCounter->GetView());
 	
 	SceneManager::GetInstance().AddScene(pScene);
 	SceneManager::GetInstance().SetActiveScene(0);

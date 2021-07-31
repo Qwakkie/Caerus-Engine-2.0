@@ -9,7 +9,8 @@
 Scoreboard::Scoreboard()
 	:m_pView(new GameObject())
 {
-	m_pView->GetTransform()->Translate({ 500.f, 0.f, 0.f });
+	const float widthOffset{ 500.f };
+	m_pView->GetTransform()->Translate({widthOffset, 0.f, 0.f });
 
 	auto* pFont{ ResourceManager::GetInstance().LoadFont("../Resources/ARCADEPI.TTF", 20) };
 
@@ -19,7 +20,7 @@ Scoreboard::Scoreboard()
 	auto* pHighText{ new GameObject() };
 	pHighText->AddComponent(new TextureComponent());
 	auto* pText{ new TextComponent("HIGH", pFont) };
-	pText->SetColor({ 255, 0, 0 });
+	pText->SetColor({ 255, 0, 0, 1});
 	pHighText->AddComponent(pText);
 	pHighText->GetTransform()->Translate({ margin, heightOffset, 0.f });
 	m_pView->AddChild(pHighText);
@@ -51,7 +52,7 @@ void Scoreboard::Notify(GameObject*, int)
 {
 }
 
-void Scoreboard::AddPoints(unsigned amount)
+void Scoreboard::AddPoints(unsigned int amount)
 {
 	m_Score += amount;
 	auto* pText{ m_pScoreView->GetComponent<TextComponent>() };
