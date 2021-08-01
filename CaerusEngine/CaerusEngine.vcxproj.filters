@@ -47,6 +47,7 @@
     <ClCompile Include="ColliderComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="BinaryReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioService.h" />
@@ -99,6 +100,7 @@
     <ClInclude Include="ColliderComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="BinaryReader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

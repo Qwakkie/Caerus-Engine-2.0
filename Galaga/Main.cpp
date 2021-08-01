@@ -7,6 +7,7 @@
 #include "FireCommand.h"
 #include "GameObject.h"
 #include "InputComponent.h"
+#include "LevelLoader.h"
 #include "LivesCounter.h"
 #include "MoveLeftCommand.h"
 #include "MoveRightCommand.h"
@@ -78,6 +79,9 @@ void LoadGame(CaerusEngine&)
 	pColliderObject->AddComponent(pCollider);
 
 	pScene->Add(pZako);
+
+	LevelLoader loader{};
+	pScene = loader.LoadLevelFromFile("../Resources/Level1.dat", "Level 1");
 
 	auto* pScoreboard{ new Scoreboard() };
 	pScene->Add(pScoreboard->GetView());
