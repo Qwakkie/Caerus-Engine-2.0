@@ -16,8 +16,5 @@ private:
 	BinaryReader* m_pReader;
 	Scene* m_pScene;
 	
-	GameObject* m_pBossPrefab;
-	GameObject* m_pGoeiPrefab;
-	GameObject* m_pZakoPrefab;
 };
 

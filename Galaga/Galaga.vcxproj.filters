@@ -16,6 +16,9 @@
     <Filter Include="Commands">
       <UniqueIdentifier>{22ac0688-ed68-4baa-ac14-9a1ea4ff8d9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Factories">
+      <UniqueIdentifier>{f73499c8-c10c-4114-b010-c7c8d2842a3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -39,6 +42,15 @@
     <ClCompile Include="LevelLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ZakoFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="BossFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="GoeiFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveLeftCommand.h">
@@ -58,6 +70,15 @@
     </ClInclude>
     <ClInclude Include="LevelLoader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZakoFactory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="GoeiFactory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="BossFactory.h">
+      <Filter>Factories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

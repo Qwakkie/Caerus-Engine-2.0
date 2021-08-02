@@ -23,25 +23,6 @@ GameObject::~GameObject()
 	}
 }
 
-GameObject::GameObject(const GameObject& other)
-	:m_pTransform{ new TransformComponent(*other.m_pTransform) }
-	,m_pComponents{}
-	,m_pChildren{}
-{
-	for(auto* pComponent:other.m_pComponents)
-	{
-		m_pComponents.push_back(new Component(*pComponent));
-	}
-
-	for(auto* pChild:other.m_pChildren)
-	{
-		m_pChildren.push_back(new GameObject(*pChild));
-	}
-
-	if(other.m_pParent)
-		other.m_pParent->AddChild(this);
-}
-
 void GameObject::SetParent(GameObject* pParent)
 {
 	m_pParent = pParent;

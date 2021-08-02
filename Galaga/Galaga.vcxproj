@@ -19,21 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BossFactory.cpp" />
     <ClCompile Include="FireCommand.cpp" />
+    <ClCompile Include="GoeiFactory.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LivesCounter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MoveLeftCommand.cpp" />
     <ClCompile Include="MoveRightCommand.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
+    <ClCompile Include="ZakoFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BossFactory.h" />
     <ClInclude Include="FireCommand.h" />
+    <ClInclude Include="GoeiFactory.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LivesCounter.h" />
     <ClInclude Include="MoveLeftCommand.h" />
     <ClInclude Include="MoveRightCommand.h" />
     <ClInclude Include="Scoreboard.h" />
+    <ClInclude Include="ZakoFactory.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -6,43 +6,23 @@
 
 #include "AnimatorComponent.h"
 #include "BinaryReader.h"
+#include "BossFactory.h"
 #include "GameObject.h"
+#include "GoeiFactory.h"
 #include "Scene.h"
 #include "TextureComponent.h"
 #include "TransformComponent.h"
+#include "ZakoFactory.h"
 
 LevelLoader::LevelLoader()
 	:m_pReader(new BinaryReader())
 	,m_pScene(nullptr)
-	,m_pBossPrefab(new GameObject())
-	,m_pGoeiPrefab(new GameObject())
-	,m_pZakoPrefab(new GameObject())
 {
-	auto* pTexture{ new TextureComponent("../Resources/Boss.png") };
-	m_pBossPrefab->AddComponent(pTexture);
-	auto* pAnimator{ new AnimatorComponent(pTexture, 8, 2) };
-	pAnimator->SetOffset(7);
-	m_pBossPrefab->AddComponent(pAnimator);
-	
-	pTexture = new TextureComponent("../Resources/Goei.png");
-	m_pGoeiPrefab->AddComponent(pTexture);
-	pAnimator = new AnimatorComponent(pTexture, 8, 1);
-	pAnimator->SetOffset(7);
-	m_pGoeiPrefab->AddComponent(pAnimator);
-
-	pTexture = new TextureComponent("../Resources/Zako.png");
-	m_pZakoPrefab->AddComponent(pTexture);
-	pAnimator = new AnimatorComponent(pTexture, 8, 1);
-	pAnimator->SetOffset(7);
-	m_pZakoPrefab->AddComponent(pAnimator);
 }
 
 LevelLoader::~LevelLoader()
 {
 	delete m_pReader;
-	delete m_pBossPrefab;
-	delete m_pGoeiPrefab;
-	delete m_pZakoPrefab;
 }
 
 enum InputMeaning
@@ -61,9 +41,15 @@ Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::st
 
 	int input{};
 
-	const float rowDistance{ 64.f };
-	int row{};
+	const float centerOffset{ 200.f };
+	const float rowDistance{ 32.f };
+	const float columnDistance{ 32.f };
+	int row{1};
 	int amount{};
+
+	ZakoFactory zakoFactory{};
+	GoeiFactory goeiFactory{};
+	BossFactory bossFactory{};
 	
 	while(m_pReader->Exists())
 	{
@@ -76,28 +62,28 @@ Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::st
 				break;
 			case Zako:
 				amount = static_cast<int>(m_pReader->Read<unsigned char>());
-				AddEnemies(m_pZakoPrefab, amount);
+				for (int i{}; i < amount; ++i)
+				{
+					m_pScene->Add(zakoFactory.CreateZako(centerOffset + (-amount/2 + static_cast<float>(i)) * columnDistance, static_cast<float>(row) * rowDistance));
+				}
 				break;
 			case Goei:
 				amount = static_cast<int>(m_pReader->Read<unsigned char>());
-				AddEnemies(m_pGoeiPrefab, amount);
+				for (int i{}; i < amount; ++i)
+				{
+					m_pScene->Add(goeiFactory.CreateGoei(centerOffset + (-amount / 2 + static_cast<float>(i)) * columnDistance, static_cast<float>(row) * rowDistance));
+				}
 				break;
 			case Boss:
 				amount = static_cast<int>(m_pReader->Read<unsigned char>());
-				AddEnemies(m_pBossPrefab, amount);
+				for (int i{}; i < amount; ++i)
+				{
+					m_pScene->Add(bossFactory.CreateBoss(centerOffset + (-amount / 2 + static_cast<float>(i)) * columnDistance, static_cast<float>(row) * rowDistance));
+				}
 				break;
 			default:
 				return m_pScene;
 		}
 	}
 	return nullptr;
-}
-
-void LevelLoader::AddEnemies(GameObject* pPrefab, int amount)
-{
-	for(int i{}; i<amount; ++i)
-	{
-		auto* pEnemy{ new GameObject(*pPrefab) };
-		m_pScene->Add(pEnemy);
-	}
 }
