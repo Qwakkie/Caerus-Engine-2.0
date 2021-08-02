@@ -1,8 +1,7 @@
 #pragma once
 #include "Observer.h"
 
-class Scoreboard :
-    public Observer
+class Scoreboard : public Observer
 {
 public:
 	Scoreboard();

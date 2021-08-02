@@ -15,6 +15,8 @@ public:
 	{
 		T value;
 		m_pReader->read((char*)&value, sizeof(T));
+		if (m_pReader->eof())
+			m_Exists = false;
 		return value;
 	}
 

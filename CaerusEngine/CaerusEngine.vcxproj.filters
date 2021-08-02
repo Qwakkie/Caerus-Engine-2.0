@@ -48,6 +48,7 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="BinaryReader.cpp" />
+    <ClCompile Include="BossComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioService.h" />
@@ -101,6 +102,7 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="BinaryReader.h" />
+    <ClInclude Include="BossComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

@@ -3,7 +3,6 @@
 #include "ActorComponent.h"
 #include "AnimatorComponent.h"
 #include "CaerusEngine.h"
-#include "ColliderComponent.h"
 #include "FireCommand.h"
 #include "GameObject.h"
 #include "InputComponent.h"
@@ -29,7 +28,12 @@ int main()
 
 void LoadGame(CaerusEngine&)
 {
-	auto* pScene{ new Scene("GameScene") };
+	auto* pScoreboard{ new Scoreboard() };
+
+	LevelLoader loader{ pScoreboard };
+	auto* pScene{ loader.LoadLevelFromFile("../Resources/Level1.dat", "Level 1") };
+	pScene->Add(pScoreboard->GetView());
+	
 	auto* pPlayer{ new GameObject() };
 
 	auto* pTexture{ new TextureComponent("../Resources/Player.png") };
@@ -47,44 +51,12 @@ void LoadGame(CaerusEngine&)
 	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonLeft, VK_LEFT, new MoveLeftCommand());
 	pInput->AddCommand(TriggerState::Released, ControllerButton::ButtonRight, VK_RIGHT, new MoveLeftCommand());
 	pInput->AddCommand(TriggerState::Released, ControllerButton::ButtonLeft, VK_LEFT, new MoveRightCommand());
-	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonRightThumb, VK_SPACE, new FireCommand());
+	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonA, VK_SPACE, new FireCommand());
 	pPlayer->AddComponent(pInput);
 
 	pPlayer->AddComponent(new ActorComponent());
 
 	pScene->Add(pPlayer);
-
-	auto* pZako{ new GameObject() };
-	pTexture = new TextureComponent("../Resources/Zako.png");
-	pZako->AddComponent(pTexture);
-	pZako->GetTransform()->SetScale(.5f);
-
-	pAnimator = new AnimatorComponent(pTexture, spriteAmount, 1);
-	pAnimator->SetSprite(spriteAmount - 1);
-	pZako->AddComponent(pAnimator);
-	const float width{ 16.f };
-	const float height{ 16.f };
-
-	auto* pColliderObject{ new GameObject() };
-	pZako->AddChild(pColliderObject);
-	const glm::vec3 offset{ 12.f, 8.f, 0.f };
-	pColliderObject->GetTransform()->Translate(offset);
-
-	auto* pCollider{ new ColliderComponent(width, height) };
-	auto enemyCallback{ [](GameObject* pActor)
-	{
-			pActor->GetParent()->MarkForDelete();
-	} };
-	pCollider->SetCallback(enemyCallback);
-	pColliderObject->AddComponent(pCollider);
-
-	pScene->Add(pZako);
-
-	LevelLoader loader{};
-	pScene = loader.LoadLevelFromFile("../Resources/Level1.dat", "Level 1");
-
-	auto* pScoreboard{ new Scoreboard() };
-	pScene->Add(pScoreboard->GetView());
 
 	auto* pLivesCounter{ new LivesCounter() };
 	pScene->Add(pLivesCounter->GetView());

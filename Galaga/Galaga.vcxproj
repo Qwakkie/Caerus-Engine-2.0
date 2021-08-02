@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BossFactory.h" />
+    <ClInclude Include="Events.h" />
     <ClInclude Include="FireCommand.h" />
     <ClInclude Include="GoeiFactory.h" />
     <ClInclude Include="LevelLoader.h" />

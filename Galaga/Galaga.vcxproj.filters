@@ -80,5 +80,8 @@
     <ClInclude Include="BossFactory.h">
       <Filter>Factories</Filter>
     </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

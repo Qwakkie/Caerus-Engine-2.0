@@ -1,3 +1,4 @@
+// ReSharper disable CppClangTidyBugproneIntegerDivision
 #include "LevelLoader.h"
 
 #include <fstream>
@@ -11,11 +12,11 @@
 #include "GoeiFactory.h"
 #include "Scene.h"
 #include "TextureComponent.h"
-#include "TransformComponent.h"
 #include "ZakoFactory.h"
 
-LevelLoader::LevelLoader()
-	:m_pReader(new BinaryReader())
+LevelLoader::LevelLoader(Scoreboard* pScoreboard)
+	:m_pScoreboard(pScoreboard)
+	,m_pReader(new BinaryReader())
 	,m_pScene(nullptr)
 {
 }
@@ -39,21 +40,19 @@ Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::st
 
 	m_pReader->Open(filePath);
 
-	int input{};
-
 	const float centerOffset{ 200.f };
 	const float rowDistance{ 32.f };
 	const float columnDistance{ 32.f };
 	int row{1};
 	int amount{};
 
-	ZakoFactory zakoFactory{};
-	GoeiFactory goeiFactory{};
-	BossFactory bossFactory{};
+	ZakoFactory zakoFactory{m_pScoreboard};
+	GoeiFactory goeiFactory{m_pScoreboard};
+	BossFactory bossFactory{m_pScoreboard};
 	
 	while(m_pReader->Exists())
 	{
-		input = static_cast<int>(m_pReader->Read<unsigned char>());
+		const int input{ static_cast<int>(m_pReader->Read<unsigned char>()) };
 
 		switch(input)
 		{
@@ -64,26 +63,26 @@ Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::st
 				amount = static_cast<int>(m_pReader->Read<unsigned char>());
 				for (int i{}; i < amount; ++i)
 				{
-					m_pScene->Add(zakoFactory.CreateZako(centerOffset + (-amount/2 + static_cast<float>(i)) * columnDistance, static_cast<float>(row) * rowDistance));
+					m_pScene->Add(zakoFactory.CreateZako(centerOffset + static_cast<float>(i - amount / 2) * columnDistance, static_cast<float>(row) * rowDistance));
 				}
 				break;
 			case Goei:
 				amount = static_cast<int>(m_pReader->Read<unsigned char>());
 				for (int i{}; i < amount; ++i)
 				{
-					m_pScene->Add(goeiFactory.CreateGoei(centerOffset + (-amount / 2 + static_cast<float>(i)) * columnDistance, static_cast<float>(row) * rowDistance));
+					m_pScene->Add(goeiFactory.CreateGoei(centerOffset + static_cast<float>(i - amount / 2) * columnDistance, static_cast<float>(row) * rowDistance));
 				}
 				break;
 			case Boss:
 				amount = static_cast<int>(m_pReader->Read<unsigned char>());
 				for (int i{}; i < amount; ++i)
 				{
-					m_pScene->Add(bossFactory.CreateBoss(centerOffset + (-amount / 2 + static_cast<float>(i)) * columnDistance, static_cast<float>(row) * rowDistance));
+					m_pScene->Add(bossFactory.CreateBoss(centerOffset + static_cast<float>(i - amount / 2) * columnDistance, static_cast<float>(row) * rowDistance));
 				}
 				break;
 			default:
-				return m_pScene;
+				return nullptr;
 		}
 	}
-	return nullptr;
+	return m_pScene;
 }

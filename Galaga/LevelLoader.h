@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+class Scoreboard;
 class BinaryReader;
 class GameObject;
 class Scene;
@@ -7,12 +8,11 @@ class Scene;
 class LevelLoader
 {
 public:
-	LevelLoader();
+	LevelLoader(Scoreboard*);
 	~LevelLoader();
 	Scene* LoadLevelFromFile(const std::string& filePath, const std::string& name);
 private:
-	void AddEnemies(GameObject*, int);
-
+	Scoreboard* m_pScoreboard;
 	BinaryReader* m_pReader;
 	Scene* m_pScene;
 	

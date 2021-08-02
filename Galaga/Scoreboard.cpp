@@ -5,6 +5,7 @@
 #include "TextComponent.h"
 #include "TextureComponent.h"
 #include "TransformComponent.h"
+#include "Events.h"
 
 Scoreboard::Scoreboard()
 	:m_pView(new GameObject())
@@ -48,8 +49,25 @@ Scoreboard::Scoreboard()
 	m_pView->AddChild(m_pScoreView);
 }
 
-void Scoreboard::Notify(GameObject*, int)
+void Scoreboard::Notify(GameObject* pActor, int event)
 {
+	if(event == ENEMY_DIED)
+	{
+		if(pActor->CompareTag("Zako"))
+		{
+			AddPoints(50);
+		}
+		
+		if(pActor->CompareTag("Goei"))
+		{
+			AddPoints(80);
+		}
+
+		if(pActor->CompareTag("Boss"))
+		{
+			AddPoints(150);
+		}
+	}
 }
 
 void Scoreboard::AddPoints(unsigned int amount)

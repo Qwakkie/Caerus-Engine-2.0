@@ -48,9 +48,11 @@ void ColliderComponent::Update(float)
 
 void ColliderComponent::Render() const
 {
+#ifdef _DEBUG
 	const glm::vec3 pos{ m_pParent->GetTransform()->GetWorldPosition() };
 	const SDL_Rect rectangle{ static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(m_Width), static_cast<int>(m_Height) };
 	Renderer::GetInstance().RenderRectangle(rectangle);
+#endif
 }
 
 void ColliderComponent::SetCallback(void(*pFunction)(GameObject*))
