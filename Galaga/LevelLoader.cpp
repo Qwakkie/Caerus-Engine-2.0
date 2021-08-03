@@ -81,7 +81,7 @@ Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::st
 				}
 				break;
 			default:
-				return nullptr;
+				return m_pScene;
 		}
 	}
 	return m_pScene;

@@ -19,6 +19,9 @@
     <Filter Include="Factories">
       <UniqueIdentifier>{f73499c8-c10c-4114-b010-c7c8d2842a3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands\MenuCommands">
+      <UniqueIdentifier>{1ee005ec-0ebd-4653-8cc9-7bad240ca563}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -51,6 +54,18 @@
     <ClCompile Include="GoeiFactory.cpp">
       <Filter>Factories</Filter>
     </ClCompile>
+    <ClCompile Include="MenuDownCommand.cpp">
+      <Filter>Commands\MenuCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuSelectCommand.cpp">
+      <Filter>Commands\MenuCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuUpCommand.cpp">
+      <Filter>Commands\MenuCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="GameModeLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveLeftCommand.h">
@@ -81,6 +96,18 @@
       <Filter>Factories</Filter>
     </ClInclude>
     <ClInclude Include="Events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuDownCommand.h">
+      <Filter>Commands\MenuCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSelectCommand.h">
+      <Filter>Commands\MenuCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUpCommand.h">
+      <Filter>Commands\MenuCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="GameModeLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

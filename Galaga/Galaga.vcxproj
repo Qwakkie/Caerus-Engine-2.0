@@ -21,10 +21,14 @@
   <ItemGroup>
     <ClCompile Include="BossFactory.cpp" />
     <ClCompile Include="FireCommand.cpp" />
+    <ClCompile Include="GameModeLoader.cpp" />
     <ClCompile Include="GoeiFactory.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LivesCounter.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuDownCommand.cpp" />
+    <ClCompile Include="MenuSelectCommand.cpp" />
+    <ClCompile Include="MenuUpCommand.cpp" />
     <ClCompile Include="MoveLeftCommand.cpp" />
     <ClCompile Include="MoveRightCommand.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
@@ -34,9 +38,13 @@
     <ClInclude Include="BossFactory.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FireCommand.h" />
+    <ClInclude Include="GameModeLoader.h" />
     <ClInclude Include="GoeiFactory.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LivesCounter.h" />
+    <ClInclude Include="MenuDownCommand.h" />
+    <ClInclude Include="MenuSelectCommand.h" />
+    <ClInclude Include="MenuUpCommand.h" />
     <ClInclude Include="MoveLeftCommand.h" />
     <ClInclude Include="MoveRightCommand.h" />
     <ClInclude Include="Scoreboard.h" />
