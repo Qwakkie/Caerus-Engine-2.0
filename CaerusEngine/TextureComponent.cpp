@@ -29,6 +29,8 @@ void TextureComponent::Initialize()
 
 void TextureComponent::Render()const
 {
+	if (!m_pTexture)
+		return;
 	const glm::vec3 pos{ m_pParent->GetTransform()->GetWorldPosition() };
 
 	const int x{ static_cast<int>(pos.x + m_OffsetX) };
