@@ -51,7 +51,7 @@ Scoreboard::Scoreboard()
 
 void Scoreboard::Notify(GameObject* pActor, int event)
 {
-	if(event == ENEMY_DIED)
+	if(event == static_cast<int>(Event::ENEMY_DIED))
 	{
 		if(pActor->CompareTag("Zako"))
 		{

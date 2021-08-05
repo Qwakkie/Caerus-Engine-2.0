@@ -36,7 +36,7 @@ GameObject* BossFactory::CreateBoss(float x, float y)
 	pBoss->AddComponent(new BossComponent());
 
 	auto* pObserver{ new ObserverComponent() };
-	pObserver->Subscribe(m_pScoreboard, ENEMY_DIED);
+	pObserver->Subscribe(m_pScoreboard, static_cast<int>(Event::ENEMY_DIED));
 	pBoss->AddComponent(pObserver);
 
 	const float width{ 25.f };

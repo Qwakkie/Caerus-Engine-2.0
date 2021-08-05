@@ -30,5 +30,5 @@ void FireCommand::Execute(GameObject* pActor)
 	
 	pActor->GetScene()->Add(pMissile);
 
-	ServiceLocator::GetAudioService()->PlaySound(Fire);
+	ServiceLocator::GetAudioService()->PlaySound(static_cast<int>(SoundIds::Fire));
 }

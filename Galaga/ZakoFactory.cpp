@@ -5,11 +5,14 @@
 
 
 #include "AnimatorComponent.h"
+#include "AudioService.h"
 #include "ColliderComponent.h"
 #include "Events.h"
 #include "GameObject.h"
 #include "ObserverComponent.h"
 #include "Scoreboard.h"
+#include "ServiceLocator.h"
+#include "SoundIds.h"
 #include "TextureComponent.h"
 #include "TransformComponent.h"
 
@@ -34,7 +37,7 @@ GameObject* ZakoFactory::CreateZako(float x, float y)
 	pZako->AddComponent(pAnimator);
 
 	auto* pObserver{ new ObserverComponent() };
-	pObserver->Subscribe(m_pScoreboard, ENEMY_DIED);
+	pObserver->Subscribe(m_pScoreboard, static_cast<int>(Event::ENEMY_DIED));
 	pZako->AddComponent(pObserver);
 
 	const float width{ 16.f };
@@ -48,8 +51,9 @@ GameObject* ZakoFactory::CreateZako(float x, float y)
 	auto* pCollider{ new ColliderComponent(width, height) };
 	auto enemyCallback{ [](GameObject* pActor)
 	{
-		pActor->GetParent()->GetComponent<ObserverComponent>()->Notify(ENEMY_DIED);
+		pActor->GetParent()->GetComponent<ObserverComponent>()->Notify(static_cast<int>(Event::ENEMY_DIED));
 		pActor->GetParent()->MarkForDelete();
+		ServiceLocator::GetAudioService()->PlaySound(static_cast<int>(SoundIds::EnemyDeath));
 	} };
 	pCollider->SetCallback(enemyCallback);
 	pColliderObject->AddComponent(pCollider);

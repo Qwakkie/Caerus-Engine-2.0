@@ -17,7 +17,8 @@ int main()
 
 void LoadGame(CaerusEngine&)
 {
-	ResourceManager::GetInstance().LoadSDLSound("../Resources/Shooting.wav", Fire);
+	ResourceManager::GetInstance().LoadSDLSound("../Resources/Shooting.wav", static_cast<int>(SoundIds::Fire));
+	ResourceManager::GetInstance().LoadSDLSound("../Resources/Enemy_dies.wav", static_cast<int>(SoundIds::EnemyDeath));
 
 	GameModeLoader selector{};
 	selector.LoadStartMenu();

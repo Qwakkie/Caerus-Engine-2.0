@@ -1,5 +1,5 @@
 #pragma once
-enum Event
+enum class Event
 {
-	ENEMY_DIED
+	ENEMY_DIED = 0
 };

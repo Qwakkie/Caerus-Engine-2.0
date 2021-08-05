@@ -1,6 +1,7 @@
 #pragma once
 
-enum
+enum class SoundIds
 {
-	Fire = 0
+	Fire = 0,
+	EnemyDeath = 1
 };
