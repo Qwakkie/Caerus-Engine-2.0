@@ -5,13 +5,15 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "SDLAudioService.h"
+#include "ServiceLocator.h"
 
 using namespace std;
 using namespace std::chrono;
 
 void CaerusEngine::Initialize()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) 
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
@@ -32,6 +34,7 @@ void CaerusEngine::Initialize()
 	m_IsInitialized = true;
 	Renderer::GetInstance().Init(m_Window);
 	ResourceManager::GetInstance().Init();
+	ServiceLocator::SetAudioService(new SDLAudioService());
 }
 
 /**

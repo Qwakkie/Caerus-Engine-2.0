@@ -1,10 +1,12 @@
 #include "CaerusPCH.h"
 #include "ResourceManager.h"
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
 #include "Renderer.h"
 #include "Font.h"
+#include "SDLAudioSource.h"
 
 ResourceManager::~ResourceManager()
 {
@@ -70,4 +72,17 @@ Font* ResourceManager::LoadFont(const std::string& file, unsigned int size)
 	}
 
 	return m_pFonts.at(file);
+}
+
+void ResourceManager::LoadSDLSound(const std::string& file, int soundid)
+{
+	if (soundid >= static_cast<int>(m_pSDLAudioSources.size()))
+		m_pSDLAudioSources.resize(soundid + 1);
+	if(!m_pSDLAudioSources[soundid])
+		m_pSDLAudioSources[soundid] = new SDLAudioSource(Mix_LoadWAV(file.c_str()));
+}
+
+SDLAudioSource* ResourceManager::GetSDLSound(int soundid)
+{
+	return m_pSDLAudioSources[soundid];
 }

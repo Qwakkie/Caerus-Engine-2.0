@@ -1,7 +1,9 @@
-#include <iostream>
-
+#include "AudioService.h"
 #include "CaerusEngine.h"
 #include "GameModeLoader.h"
+#include "ResourceManager.h"
+#include "ServiceLocator.h"
+#include "SoundIds.h"
 
 void LoadGame(CaerusEngine& engine);
 
@@ -15,6 +17,8 @@ int main()
 
 void LoadGame(CaerusEngine&)
 {
+	ResourceManager::GetInstance().LoadSDLSound("../Resources/Shooting.wav", Fire);
+
 	GameModeLoader selector{};
 	selector.LoadStartMenu();
 }

@@ -2,9 +2,12 @@
 
 
 #include "ActorComponent.h"
+#include "AudioService.h"
 #include "ColliderComponent.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "ServiceLocator.h"
+#include "SoundIds.h"
 #include "TextureComponent.h"
 #include "TransformComponent.h"
 
@@ -26,4 +29,6 @@ void FireCommand::Execute(GameObject* pActor)
 	pMissile->AddComponent(pCollider);
 	
 	pActor->GetScene()->Add(pMissile);
+
+	ServiceLocator::GetAudioService()->PlaySound(Fire);
 }

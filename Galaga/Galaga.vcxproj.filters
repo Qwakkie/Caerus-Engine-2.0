@@ -110,5 +110,8 @@
     <ClInclude Include="GameModeLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SoundIds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AudioService.cpp" />
     <ClCompile Include="CaerusPCH.cpp" />
     <ClCompile Include="CommandProvider.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -10,7 +9,6 @@
     <ClCompile Include="Locator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="CaerusEngine.cpp" />
-    <ClCompile Include="NullAudio.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -49,9 +47,21 @@
     </ClCompile>
     <ClCompile Include="BinaryReader.cpp" />
     <ClCompile Include="BossComponent.cpp" />
+    <ClCompile Include="AudioService.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="NullAudio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLAudioService.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLAudioSource.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioService.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandProvider.h" />
     <ClInclude Include="Component.h" />
@@ -61,7 +71,6 @@
     <ClInclude Include="CaerusEngine.h" />
     <ClInclude Include="CaerusPCH.h" />
     <ClInclude Include="Locator.h" />
-    <ClInclude Include="NullAudio.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
     <ClInclude Include="Renderer.h" />
@@ -103,10 +112,26 @@
     </ClInclude>
     <ClInclude Include="BinaryReader.h" />
     <ClInclude Include="BossComponent.h" />
+    <ClInclude Include="AudioService.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="NullAudio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLAudioService.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLAudioSource.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
       <UniqueIdentifier>{6ebb03ae-b748-4178-90ce-14e7a49bbbc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{b0df6c88-f876-469b-ab7b-12d7376bce05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
