@@ -66,6 +66,9 @@
     <ClCompile Include="GameModeLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FleetComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveLeftCommand.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SoundIds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FleetComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

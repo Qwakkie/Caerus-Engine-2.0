@@ -60,6 +60,7 @@
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="AlienComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
@@ -125,6 +126,7 @@
       <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="AlienComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

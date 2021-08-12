@@ -228,6 +228,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
   <ItemGroup>
     <ClInclude Include="ActorComponent.h" />
     <ClInclude Include="AIComponent.h" />
+    <ClInclude Include="AlienComponent.h" />
     <ClInclude Include="AnimatorComponent.h" />
     <ClInclude Include="AudioService.h" />
     <ClInclude Include="BinaryReader.h" />
@@ -265,6 +266,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
   <ItemGroup>
     <ClCompile Include="ActorComponent.cpp" />
     <ClCompile Include="AIComponent.cpp" />
+    <ClCompile Include="AlienComponent.cpp" />
     <ClCompile Include="AnimatorComponent.cpp" />
     <ClCompile Include="AudioService.cpp" />
     <ClCompile Include="BinaryReader.cpp" />
