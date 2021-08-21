@@ -1,16 +1,10 @@
 # Build and .vs Engine
 .vs
-Minigin/x64
-Minigin/x84
-Minigin/Win32
 Win32
 x64
-x86
 Debug
 Release
 
 # Build for Game
-Galage/x64
-Galaga/x86
-Galaga/Win32
+Galaga/Debug
 Galaga/Release
