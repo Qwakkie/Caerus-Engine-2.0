@@ -46,7 +46,6 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="BinaryReader.cpp" />
-    <ClCompile Include="BossComponent.cpp" />
     <ClCompile Include="AudioService.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
@@ -60,7 +59,15 @@
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="ServiceLocator.cpp" />
-    <ClCompile Include="AlienComponent.cpp" />
+    <ClCompile Include="AlienComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FleetComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BossComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
@@ -112,7 +119,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="BinaryReader.h" />
-    <ClInclude Include="BossComponent.h" />
     <ClInclude Include="AudioService.h">
       <Filter>Audio</Filter>
     </ClInclude>
@@ -126,7 +132,15 @@
       <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="ServiceLocator.h" />
-    <ClInclude Include="AlienComponent.h" />
+    <ClInclude Include="AlienComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FleetComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BossComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

@@ -8,6 +8,8 @@
 #include "AnimatorComponent.h"
 #include "BinaryReader.h"
 #include "BossFactory.h"
+#include "FleetComponent.h"
+#include "FleetObserver.h"
 #include "GameObject.h"
 #include "GoeiFactory.h"
 #include "Scene.h"
@@ -38,6 +40,13 @@ Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::st
 {
 	m_pScene = new Scene(name);
 
+	auto* pFleetObject{ new GameObject() };
+	auto* pFleet{ new FleetComponent() };
+	pFleetObject->AddComponent(pFleet);
+	m_pScene->Add(pFleetObject);
+
+	auto* pFleetObserver{ new FleetObserver(pFleet) };
+
 	m_pReader->Open(filePath);
 
 	const float centerOffset{ 200.f };
@@ -46,9 +55,9 @@ Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::st
 	int row{1};
 	int amount{};
 
-	ZakoFactory zakoFactory{m_pScoreboard};
-	GoeiFactory goeiFactory{m_pScoreboard};
-	BossFactory bossFactory{m_pScoreboard};
+	ZakoFactory zakoFactory{m_pScoreboard, pFleetObserver};
+	GoeiFactory goeiFactory{m_pScoreboard, pFleetObserver};
+	BossFactory bossFactory{m_pScoreboard, pFleetObserver};
 	
 	while(m_pReader->Exists())
 	{

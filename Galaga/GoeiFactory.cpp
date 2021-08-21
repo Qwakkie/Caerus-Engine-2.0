@@ -1,10 +1,14 @@
 #include "GoeiFactory.h"
 
 
+
+#include "ActorComponent.h"
+#include "AlienComponent.h"
 #include "AnimatorComponent.h"
 #include "AudioService.h"
 #include "ColliderComponent.h"
 #include "Events.h"
+#include "FleetObserver.h"
 #include "GameObject.h"
 #include "ObserverComponent.h"
 #include "Scoreboard.h"
@@ -13,8 +17,9 @@
 #include "TextureComponent.h"
 #include "TransformComponent.h"
 
-GoeiFactory::GoeiFactory(Scoreboard* pScoreboard)
+GoeiFactory::GoeiFactory(Scoreboard* pScoreboard, FleetObserver* pFleet)
 	:m_pScoreboard(pScoreboard)
+	,m_pFleetObserver(pFleet)
 {
 }
 
@@ -36,6 +41,8 @@ GameObject* GoeiFactory::CreateGoei(float x, float y)
 
 	auto* pObserver{ new ObserverComponent() };
 	pObserver->Subscribe(m_pScoreboard, static_cast<int>(Event::ENEMY_DIED));
+	pObserver->Subscribe(m_pFleetObserver, static_cast<int>(Event::ENEMY_CREATED));
+	pObserver->Subscribe(m_pFleetObserver, static_cast<int>(Event::ENEMY_DIED));
 	pGoei->AddComponent(pObserver);
 	
 	const float width{ 16.f };
@@ -50,11 +57,14 @@ GameObject* GoeiFactory::CreateGoei(float x, float y)
 	auto enemyCallback{ [](GameObject* pActor)
 	{
 		pActor->GetParent()->GetComponent<ObserverComponent>()->Notify(static_cast<int>(Event::ENEMY_DIED));
-		pActor->GetParent()->MarkForDelete();
 		ServiceLocator::GetAudioService()->PlaySound(static_cast<int>(SoundIds::EnemyDeath));
 	} };
 	pCollider->SetCallback(enemyCallback);
 	pColliderObject->AddComponent(pCollider);
+
+	pGoei->AddComponent(new AlienComponent());
+
+	pGoei->AddComponent(new ActorComponent());
 
 	return pGoei;
 }

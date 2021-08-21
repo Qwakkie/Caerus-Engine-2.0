@@ -1,18 +1,23 @@
 #include "BossFactory.h"
 
 
+
+#include "ActorComponent.h"
+#include "AlienComponent.h"
 #include "AnimatorComponent.h"
 #include "BossComponent.h"
 #include "ColliderComponent.h"
 #include "Events.h"
+#include "FleetObserver.h"
 #include "GameObject.h"
 #include "ObserverComponent.h"
 #include "TextureComponent.h"
 #include "TransformComponent.h"
 #include "Scoreboard.h"
 
-BossFactory::BossFactory(Scoreboard* pScoreboard)
+BossFactory::BossFactory(Scoreboard* pScoreboard, FleetObserver* pFleet)
 	:m_pScoreboard(pScoreboard)
+	,m_pFleetObserver(pFleet)
 {
 }
 
@@ -35,8 +40,12 @@ GameObject* BossFactory::CreateBoss(float x, float y)
 
 	pBoss->AddComponent(new BossComponent());
 
+	pBoss->AddComponent(new ActorComponent());
+
 	auto* pObserver{ new ObserverComponent() };
 	pObserver->Subscribe(m_pScoreboard, static_cast<int>(Event::ENEMY_DIED));
+	pObserver->Subscribe(m_pFleetObserver, static_cast<int>(Event::ENEMY_CREATED));
+	pObserver->Subscribe(m_pFleetObserver, static_cast<int>(Event::ENEMY_DIED));
 	pBoss->AddComponent(pObserver);
 
 	const float width{ 25.f };
@@ -54,6 +63,8 @@ GameObject* BossFactory::CreateBoss(float x, float y)
 	} };
 	pCollider->SetCallback(enemyCallback);
 	pColliderObject->AddComponent(pCollider);
+
+	pBoss->AddComponent(new AlienComponent());
 
 	return pBoss;
 }

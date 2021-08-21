@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <vector>
+
 class Scoreboard;
 class BinaryReader;
 class GameObject;
@@ -15,6 +17,5 @@ private:
 	Scoreboard* m_pScoreboard;
 	BinaryReader* m_pReader;
 	Scene* m_pScene;
-	
 };
 

@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="BossFactory.cpp" />
     <ClCompile Include="FireCommand.cpp" />
-    <ClCompile Include="FleetComponent.cpp" />
+    <ClCompile Include="FleetObserver.cpp" />
     <ClCompile Include="GameModeLoader.cpp" />
     <ClCompile Include="GoeiFactory.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
@@ -39,7 +39,7 @@
     <ClInclude Include="BossFactory.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FireCommand.h" />
-    <ClInclude Include="FleetComponent.h" />
+    <ClInclude Include="FleetObserver.h" />
     <ClInclude Include="GameModeLoader.h" />
     <ClInclude Include="GoeiFactory.h" />
     <ClInclude Include="LevelLoader.h" />

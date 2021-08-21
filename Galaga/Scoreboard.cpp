@@ -1,5 +1,7 @@
 #include "Scoreboard.h"
 
+
+#include "AlienComponent.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "TextComponent.h"
@@ -53,19 +55,29 @@ void Scoreboard::Notify(GameObject* pActor, int event)
 {
 	if(event == static_cast<int>(Event::ENEMY_DIED))
 	{
+		const bool isBombing{ pActor->GetComponent<AlienComponent>()->IsBombing() };
 		if(pActor->CompareTag("Zako"))
 		{
-			AddPoints(50);
+			if (isBombing)
+				AddPoints(100);
+			else
+				AddPoints(50);
 		}
 		
 		if(pActor->CompareTag("Goei"))
 		{
-			AddPoints(80);
+			if (isBombing)
+				AddPoints(160);
+			else
+				AddPoints(80);
 		}
 
 		if(pActor->CompareTag("Boss"))
 		{
-			AddPoints(150);
+			if (isBombing)
+				AddPoints(400);
+			else
+				AddPoints(150);
 		}
 	}
 }

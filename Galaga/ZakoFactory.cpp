@@ -4,6 +4,8 @@
 
 
 
+#include "ActorComponent.h"
+#include "AlienComponent.h"
 #include "AnimatorComponent.h"
 #include "AudioService.h"
 #include "ColliderComponent.h"
@@ -16,8 +18,9 @@
 #include "TextureComponent.h"
 #include "TransformComponent.h"
 
-ZakoFactory::ZakoFactory(Scoreboard* pScoreboard)
+ZakoFactory::ZakoFactory(Scoreboard* pScoreboard, FleetObserver* pFleet)
 	:m_pScoreboard(pScoreboard)
+	,m_pFleetObserver(pFleet)
 {
 }
 
@@ -38,6 +41,8 @@ GameObject* ZakoFactory::CreateZako(float x, float y)
 
 	auto* pObserver{ new ObserverComponent() };
 	pObserver->Subscribe(m_pScoreboard, static_cast<int>(Event::ENEMY_DIED));
+	pObserver->Subscribe(m_pFleetObserver, static_cast<int>(Event::ENEMY_CREATED));
+	pObserver->Subscribe(m_pFleetObserver, static_cast<int>(Event::ENEMY_DIED));
 	pZako->AddComponent(pObserver);
 
 	const float width{ 16.f };
@@ -52,11 +57,14 @@ GameObject* ZakoFactory::CreateZako(float x, float y)
 	auto enemyCallback{ [](GameObject* pActor)
 	{
 		pActor->GetParent()->GetComponent<ObserverComponent>()->Notify(static_cast<int>(Event::ENEMY_DIED));
-		pActor->GetParent()->MarkForDelete();
 		ServiceLocator::GetAudioService()->PlaySound(static_cast<int>(SoundIds::EnemyDeath));
 	} };
 	pCollider->SetCallback(enemyCallback);
 	pColliderObject->AddComponent(pCollider);
+
+	pZako->AddComponent(new AlienComponent());
+
+	pZako->AddComponent(new ActorComponent());
 
 	return pZako;
 }

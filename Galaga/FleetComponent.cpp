@@ -1,9 +1,6 @@
 #include "FleetComponent.h"
 
 
-#include "AlienComponent.h"
-#include "GameObject.h"
-
 void FleetComponent::Update(float deltaTime)
 {
 	m_ElapsedTime += deltaTime;
