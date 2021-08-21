@@ -82,7 +82,7 @@ void GameModeLoader::LoadStartMenu()
 
 	const int gamemodeAmount{ 2 };
 	auto* pInput{ new InputComponent() };
-	auto* pSelectCommand{ new MenuSelectCommand(this) };
+	auto* pSelectCommand{ new MenuSelectCommand() };
 	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonA, VK_SPACE, pSelectCommand);
 	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonDown, VK_DOWN, new MenuDownCommand(pSelectCommand, gamemodeAmount));
 	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonUp, VK_UP, new MenuUpCommand(pSelectCommand, gamemodeAmount));
@@ -91,6 +91,14 @@ void GameModeLoader::LoadStartMenu()
 	
 	SceneManager::GetInstance().AddScene(pScene);
 	SceneManager::GetInstance().SetActiveScene(0);
+}
+
+void GameModeLoader::LoadGameOver()
+{
+	auto* pScene{ new Scene("GameOver") };
+
+	SceneManager::GetInstance().AddScene(pScene);
+	SceneManager::GetInstance().SetActiveScene("GameOver");
 }
 
 void GameModeLoader::LoadSingleplayer()

@@ -3,9 +3,8 @@
 class LivesCounter : public Observer
 {
 public:
-	LivesCounter();
 	void Notify(GameObject*, int eventId) override;
-	GameObject* GetView() { return m_pView; }
+	GameObject* GetView();
 private:
 	void LoseLife();
 

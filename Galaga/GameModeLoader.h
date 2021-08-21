@@ -3,11 +3,12 @@
 class GameModeLoader
 {
 public:
-	void LoadGamemode(int gamemode);
-	void LoadStartMenu();
+	static void LoadGamemode(int gamemode);
+	static void LoadStartMenu();
+	static void LoadGameOver();
 private:
-	void LoadSingleplayer();
-	void LoadMultiplayer();
-	void LoadVersus();
+	static void LoadSingleplayer();
+	static void LoadMultiplayer();
+	static void LoadVersus();
 };
 
