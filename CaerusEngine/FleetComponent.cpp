@@ -52,11 +52,10 @@ GameObject* FleetComponent::SelectAlien()
 			continue;
 		if(pAlien->CompareTag(tag))
 		{
-			if (!pSelected)
-				pSelected = pAlien;
-			else if((pAlien->GetTransform()->GetWorldPosition().x < pSelected->GetTransform()->GetWorldPosition().x ||
+			if (!pSelected ||
+				((pAlien->GetTransform()->GetWorldPosition().x < pSelected->GetTransform()->GetWorldPosition().x ||
 					pAlien->GetTransform()->GetWorldPosition().y > pSelected->GetTransform()->GetWorldPosition().y) &&
-				!pAlien->GetComponent<AlienComponent>()->IsBombing())
+				!pAlien->GetComponent<AlienComponent>()->IsBombing()))
 			{
 				pSelected = pAlien;
 			}
