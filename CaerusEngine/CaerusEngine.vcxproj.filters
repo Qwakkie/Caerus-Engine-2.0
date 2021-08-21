@@ -68,6 +68,7 @@
     <ClCompile Include="BossComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="BulletComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="BossComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="BulletComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

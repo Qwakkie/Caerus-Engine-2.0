@@ -233,6 +233,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClInclude Include="AudioService.h" />
     <ClInclude Include="BinaryReader.h" />
     <ClInclude Include="BossComponent.h" />
+    <ClInclude Include="BulletComponent.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="CollisionChecker.h" />
     <ClInclude Include="Command.h" />
@@ -272,6 +273,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClCompile Include="AudioService.cpp" />
     <ClCompile Include="BinaryReader.cpp" />
     <ClCompile Include="BossComponent.cpp" />
+    <ClCompile Include="BulletComponent.cpp" />
     <ClCompile Include="CaerusPCH.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="CollisionChecker.cpp" />
