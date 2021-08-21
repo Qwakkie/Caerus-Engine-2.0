@@ -1,5 +1,7 @@
 #include "LivesCounter.h"
 
+
+#include "Events.h"
 #include "GameObject.h"
 #include "TextureComponent.h"
 #include "TransformComponent.h"
@@ -28,8 +30,12 @@ LivesCounter::LivesCounter()
 	}
 }
 
-void LivesCounter::Notify(GameObject*, int)
+void LivesCounter::Notify(GameObject*, int event)
 {
+	if (event == static_cast<int>(Event::PLAYER_HIT))
+	{ 
+		LoseLife();
+	}
 }
 
 void LivesCounter::LoseLife()

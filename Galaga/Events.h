@@ -2,5 +2,6 @@
 enum class Event
 {
 	ENEMY_CREATED = 0,
-	ENEMY_DIED = 1
+	ENEMY_DIED = 1,
+	PLAYER_HIT
 };

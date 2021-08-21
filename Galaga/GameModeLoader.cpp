@@ -2,6 +2,8 @@
 
 #include "ActorComponent.h"
 #include "AnimatorComponent.h"
+#include "ColliderComponent.h"
+#include "Events.h"
 #include "FireCommand.h"
 #include "GameObject.h"
 #include "InputComponent.h"
@@ -12,6 +14,7 @@
 #include "MenuUpCommand.h"
 #include "MoveLeftCommand.h"
 #include "MoveRightCommand.h"
+#include "ObserverComponent.h"
 #include "ResourceManager.h"
 #include "Scene.h"
 #include "SceneManager.h"
@@ -121,10 +124,26 @@ void GameModeLoader::LoadSingleplayer()
 
 	pPlayer->AddComponent(new ActorComponent());
 
+	auto* pColliderObject{ new GameObject() };
+	pPlayer->AddChild(pColliderObject);
+	pColliderObject->GetTransform()->Translate({ 5.f, 5.f, 0.f });
+	auto* pCollider{ new ColliderComponent(27.f, 25.f, CollisionGroup::player) };
+	pColliderObject->AddComponent(pCollider);
+
+	auto playerCallback{ [](GameObject* pActor)
+	{
+		pActor->GetParent()->GetComponent<ObserverComponent>()->Notify(static_cast<int>(Event::PLAYER_HIT));
+	} };
+	pCollider->SetCallback(playerCallback);
+
 	pScene->Add(pPlayer);
 
 	auto* pLivesCounter{ new LivesCounter() };
 	pScene->Add(pLivesCounter->GetView());
+
+	auto* pObserver{ new ObserverComponent() };
+	pObserver->Subscribe(pLivesCounter, static_cast<int>(Event::PLAYER_HIT));
+	pPlayer->AddComponent(pObserver);
 
 	SceneManager::GetInstance().AddScene(pScene);
 	SceneManager::GetInstance().SetActiveScene(levelName);
