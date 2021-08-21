@@ -8,9 +8,10 @@
 CollisionChecker* ColliderComponent::m_pCollisionChecker{ nullptr };
 int ColliderComponent::m_ColliderAmount{};
 
-ColliderComponent::ColliderComponent(float x, float y)
+ColliderComponent::ColliderComponent(float x, float y, CollisionGroup group)
 	:m_Width(x)
 	,m_Height(y)
+	,m_Group(group)
 {
 	++m_ColliderAmount;
 }
@@ -19,18 +20,11 @@ ColliderComponent::~ColliderComponent()
 {
 	m_pCollisionChecker->RemoveCollider(this);
 	--m_ColliderAmount;
-	if(!m_ColliderAmount)
+	if (!m_ColliderAmount)
 	{
 		delete m_pCollisionChecker;
 		m_pCollisionChecker = nullptr;
 	}
-}
-
-ColliderComponent::ColliderComponent(ColliderComponent& other)
-	:m_Width(other.m_Width)
-	,m_Height(other.m_Height)
-{
-	++m_ColliderAmount;
 }
 
 void ColliderComponent::Initialize()

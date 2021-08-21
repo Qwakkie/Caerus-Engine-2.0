@@ -20,6 +20,8 @@ public:
 	void SetScene(Scene*);
 	[[nodiscard]] GameObject* GetParent()const;
 	[[nodiscard]] Scene* GetScene()const;
+	[[nodiscard]] GameObject* GetChild(int index)const;
+	[[nodiscard]] size_t GetChildrenAmount()const { return m_pChildren.size(); }
 
 	void MarkForDelete();
 	void DeleteMarkedChildren();

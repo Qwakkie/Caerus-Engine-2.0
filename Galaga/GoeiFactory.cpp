@@ -53,7 +53,7 @@ GameObject* GoeiFactory::CreateGoei(float x, float y)
 	const glm::vec3 offset{ 12.f, 8.f, 0.f };
 	pColliderObject->GetTransform()->Translate(offset);
 
-	auto* pCollider{ new ColliderComponent(width, height) };
+	auto* pCollider{ new ColliderComponent(width, height, CollisionGroup::enemy) };
 	auto enemyCallback{ [](GameObject* pActor)
 	{
 		pActor->GetParent()->GetComponent<ObserverComponent>()->Notify(static_cast<int>(Event::ENEMY_DIED));

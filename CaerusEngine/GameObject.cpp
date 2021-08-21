@@ -117,6 +117,11 @@ Scene* GameObject::GetScene() const
 	return m_pScene;
 }
 
+GameObject* GameObject::GetChild(int index) const
+{
+	return m_pChildren[index];
+}
+
 void GameObject::MarkForDelete()
 {
 	m_MarkedForDelete = true;

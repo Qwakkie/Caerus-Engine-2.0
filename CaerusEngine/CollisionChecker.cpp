@@ -16,6 +16,8 @@ void CollisionChecker::DoCollisionCheck(ColliderComponent* pCollider)
 {
 	for(auto* pOtherCollider : m_pColliders)
 	{
+		if (pCollider->GetCollisionGroup() == pOtherCollider->GetCollisionGroup())
+			continue;
 		if (pCollider->IsOverLapping(pOtherCollider))
 			pCollider->Callback();
 	}

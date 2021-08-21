@@ -56,7 +56,7 @@ GameObject* BossFactory::CreateBoss(float x, float y)
 	const glm::vec3 offset{ 5.f, 0.f, 0.f };
 	pColliderObject->GetTransform()->Translate(offset);
 
-	auto* pCollider{ new ColliderComponent(width, height) };
+	auto* pCollider{ new ColliderComponent(width, height, CollisionGroup::enemy) };
 	auto enemyCallback{ [](GameObject* pActor)
 	{
 		pActor->GetParent()->GetComponent<BossComponent>()->Hit();

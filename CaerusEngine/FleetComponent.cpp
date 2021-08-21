@@ -48,6 +48,8 @@ GameObject* FleetComponent::SelectAlien()
 	GameObject* pSelected{};
 	for(auto* pAlien:m_pAliens)
 	{
+		if (!pAlien)
+			continue;
 		if(pAlien->CompareTag(tag))
 		{
 			if (!pSelected)

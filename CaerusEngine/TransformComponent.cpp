@@ -73,11 +73,9 @@ void TransformComponent::UpdateTransforms()
 
 void TransformComponent::SetFlags()
 {
-	//TODO: FIX THIS FUNCTION
-	//auto pChildren{ m_pParent->GetChildren() };
-	//for(size_t i{}; i<pChildren.size(); ++i)
-	//{
-	//	pChildren[i]->GetTransform()->SetFlags();
-	//}
+	for(size_t i{}; i<m_pParent->GetChildrenAmount(); ++i)
+	{
+		m_pParent->GetChild(i)->GetTransform()->SetFlags();
+	}
 	SetDirtyFlag();
 }
