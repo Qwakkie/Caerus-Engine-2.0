@@ -59,10 +59,10 @@ bool InputManager::IsTriggered(InputAction action) const
 	case TriggerState::Down:
 		return m_CurrentControllerState.Gamepad.wButtons & (1 << static_cast<int>(action.button)) || m_pCurrentKeyboardState[action.key] & 0xF0;
 	case TriggerState::Pressed:
-		return m_CurrentControllerState.Gamepad.wButtons & (1 << static_cast<int>(action.button)) && m_PreviousControllerState.Gamepad.wButtons ^ (1 << static_cast<int>(action.button))
+		return m_CurrentControllerState.Gamepad.wButtons & (1 << static_cast<int>(action.button)) && !(m_PreviousControllerState.Gamepad.wButtons & (1 << static_cast<int>(action.button)))
 			|| m_pCurrentKeyboardState[action.key] & 0xF0 && !(m_pOldKeyboardState[action.key] & 0xF0);
 	case TriggerState::Released:
-		return m_CurrentControllerState.Gamepad.wButtons ^ (1 << static_cast<int>(action.button)) && m_PreviousControllerState.Gamepad.wButtons & (1 << static_cast<int>(action.button))
+		return !(m_CurrentControllerState.Gamepad.wButtons & (1 << static_cast<int>(action.button))) && m_PreviousControllerState.Gamepad.wButtons & (1 << static_cast<int>(action.button))
 		|| !(m_pCurrentKeyboardState[action.key] & 0xF0) && m_pOldKeyboardState[action.key] & 0xF0;
 	default:
 		return false;
