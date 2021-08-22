@@ -1,9 +1,9 @@
 #include "AlienComponent.h"
 
-
 #include "ActorComponent.h"
 #include "GameObject.h"
 #include "ObserverComponent.h"
+#include "TransformComponent.h"
 #include "../Galaga/Events.h"
 
 void AlienComponent::Initialize()
@@ -13,6 +13,19 @@ void AlienComponent::Initialize()
 
 void AlienComponent::Update(float)
 {
+	if (!m_IsBombing)
+		return;
+
+	const glm::vec3 bombCenter{ 200.f, 200.f, 0.f };
+	const auto& pos{ m_pParent->GetTransform()->GetWorldPosition() };
+	auto direction{ bombCenter - pos };
+	const float magnitude{ sqrtf(powf(direction.x, 2) + powf(direction.y, 2) + powf(direction.z, 2)) };
+	direction /= magnitude;
+
+	auto* pActorComp{ m_pParent->GetComponent<ActorComponent>() };
+	direction *= pActorComp->GetMaxSpeed();
+	
+	pActorComp->AddVelocity(direction.x, direction.y);
 }
 
 bool AlienComponent::IsBombing()
@@ -23,5 +36,4 @@ bool AlienComponent::IsBombing()
 void AlienComponent::StartBombing()
 {
 	m_IsBombing = true;
-	m_pParent->GetComponent<ActorComponent>()->AddVelocity(5.f, 5.f);
 }
