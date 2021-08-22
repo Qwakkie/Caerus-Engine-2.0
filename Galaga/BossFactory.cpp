@@ -35,7 +35,7 @@ GameObject* BossFactory::CreateBoss(float x, float y)
 	pBoss->SetTag("Boss");
 	
 	auto* pAnimator{ new AnimatorComponent(pTexture, spriteAmount/rowAmount, rowAmount) };
-	pAnimator->SetOffset(spriteAmount - 2);
+	pAnimator->SetSprite(spriteAmount - 4);
 	pBoss->AddComponent(pAnimator);
 
 	pBoss->AddComponent(new BossComponent());
