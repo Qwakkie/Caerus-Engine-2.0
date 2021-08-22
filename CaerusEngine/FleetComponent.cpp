@@ -31,36 +31,42 @@ void FleetComponent::RemoveAlien(GameObject* pAlien)
 
 GameObject* FleetComponent::SelectAlien()
 {
-	const int random{ RandomNumberGenerator::GetRandomInt(0, 100) };
 
 	std::string tag{};
 
-	const int bossOdds{ 20 };
+	const int bossOdds{ 5 };
 	const int zakoOdds{ 40 };
 	
-	if (random <= bossOdds)
-		tag = "Boss";
-	else if (random <= bossOdds + zakoOdds)
-		tag = "Zako";
-	else
-		tag = "Goei";
-
 	GameObject* pSelected{};
-	for(auto* pAlien:m_pAliens)
+
+	while (!pSelected)
 	{
-		if (!pAlien)
-			continue;
-		if(pAlien->CompareTag(tag))
+		const int random{ RandomNumberGenerator::GetRandomInt(0, 100) };
+		const bool selectRight{ static_cast<bool>(random % 2) };
+
+		if (random <= bossOdds)
+			tag = "Boss";
+		else if (random <= bossOdds + zakoOdds)
+			tag = "Zako";
+		else
+			tag = "Goei";
+
+		for (auto* pAlien : m_pAliens)
 		{
-			if (!pSelected ||
-				((pAlien->GetTransform()->GetWorldPosition().x < pSelected->GetTransform()->GetWorldPosition().x ||
-					pAlien->GetTransform()->GetWorldPosition().y > pSelected->GetTransform()->GetWorldPosition().y) &&
-				!pAlien->GetComponent<AlienComponent>()->IsBombing()))
+			if (!pAlien)
+				continue;
+			if (pAlien->CompareTag(tag))
 			{
-				pSelected = pAlien;
+				if (!pSelected ||
+					((((pAlien->GetTransform()->GetWorldPosition().x < pSelected->GetTransform()->GetWorldPosition().x) ^ selectRight) ||
+						pAlien->GetTransform()->GetWorldPosition().y > pSelected->GetTransform()->GetWorldPosition().y) &&
+						!pAlien->GetComponent<AlienComponent>()->IsBombing()))
+				{
+					pSelected = pAlien;
+				}
 			}
 		}
 	}
-	
+
 	return pSelected;
 }
