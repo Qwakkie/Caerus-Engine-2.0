@@ -18,8 +18,10 @@ public:
 	void AddVelocity(float x, float y);
 	void SetVelocity(float x, float y);
 	float GetMaxSpeed()const { return m_MaxSpeed; }
+	void SetClampHorizontal(float max, float min);
 private:
 	glm::vec2 m_Velocity{};
+	glm::vec2 m_HorizontalClamp{};
 	float m_MaxSpeed{ 200.f };
 };
 

@@ -131,7 +131,9 @@ void GameModeLoader::LoadSingleplayer()
 	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonA, VK_SPACE, new FireCommand());
 	pPlayer->AddComponent(pInput);
 
-	pPlayer->AddComponent(new ActorComponent());
+	auto* pActor{ new ActorComponent() };
+	pActor->SetClampHorizontal(450.f, 0.f);
+	pPlayer->AddComponent(pActor);
 
 	auto* pColliderObject{ new GameObject() };
 	pPlayer->AddChild(pColliderObject);
