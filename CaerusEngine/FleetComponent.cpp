@@ -39,7 +39,7 @@ void FleetComponent::RemoveAlien(GameObject* pAlien)
 GameObject* FleetComponent::SelectAlien()
 {
 
-	std::string tag{};
+	std::string tag{"Goei"};
 
 	const int bossOdds{ 5 };
 	const int zakoOdds{ 40 };
@@ -53,8 +53,6 @@ GameObject* FleetComponent::SelectAlien()
 		tag = "Boss";
 	else if (random <= bossOdds + zakoOdds)
 		tag = "Zako";
-	else
-		tag = "Goei";
 
 	pSelected = FindAlienOfType(tag, selectRight);
 

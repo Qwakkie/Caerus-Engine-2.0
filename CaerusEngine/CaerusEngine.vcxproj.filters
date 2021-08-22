@@ -69,6 +69,7 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="BulletComponent.cpp" />
+    <ClCompile Include="LoadMenuCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
@@ -143,6 +144,7 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="BulletComponent.h" />
+    <ClInclude Include="LoadMenuCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

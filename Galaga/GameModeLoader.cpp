@@ -9,6 +9,7 @@
 #include "InputComponent.h"
 #include "LevelLoader.h"
 #include "LivesCounter.h"
+#include "LoadMenuCommand.h"
 #include "MenuDownCommand.h"
 #include "MenuSelectCommand.h"
 #include "MenuUpCommand.h"
@@ -96,6 +97,23 @@ void GameModeLoader::LoadStartMenu()
 void GameModeLoader::LoadGameOver()
 {
 	auto* pScene{ new Scene("GameOver") };
+
+	auto* pText{ new GameObject() };
+
+	const float marginX{ 150.f };
+	const float marginY{ 250.f };
+	pText->GetTransform()->Translate({ marginX, marginY, 0.f });
+
+	pText->AddComponent(new TextureComponent());
+	auto* pFont{ ResourceManager::GetInstance().LoadFont("../Resources/ARCADEPI.TTF", 20) };
+	auto* pTextComp{ new TextComponent("SPACE TO RETURN TO MENU", pFont) };
+	pText->AddComponent(pTextComp);
+
+	auto* pInput{ new InputComponent() };
+	pInput->AddCommand(TriggerState::Pressed, ControllerButton::ButtonA, VK_SPACE, new LoadMenuCommand());
+	pText->AddComponent(pInput);
+	
+	pScene->Add(pText);
 
 	SceneManager::GetInstance().AddScene(pScene);
 	SceneManager::GetInstance().SetActiveScene("GameOver");
