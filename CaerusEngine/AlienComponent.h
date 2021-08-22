@@ -18,8 +18,9 @@ private:
 	void RegularBombRun();
 	void Return();
 
-	glm::vec2 m_StartPos{};
+	glm::vec3 m_StartPos{};
 	glm::vec3 m_PlayerPos{};
 	bool m_IsBombing{};
+	bool m_IsReturning{};
 };
 

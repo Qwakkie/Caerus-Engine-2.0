@@ -13,6 +13,19 @@ void AlienComponent::Initialize()
 
 void AlienComponent::Update(float)
 {
+	if(m_IsReturning)
+	{
+		const auto& pos{ m_pParent->GetTransform()->GetWorldPosition() };
+		const float margin{ 0.01f };
+
+		if (m_StartPos.y - pos.y < margin)
+		{
+			m_IsBombing = false;
+			m_IsReturning = false;
+			auto* pActorComp{ m_pParent->GetComponent<ActorComponent>() };
+			pActorComp->SetVelocity(0.f, 0.f);
+		}
+	}
 	if (!m_IsBombing)
 		return;
 
@@ -68,4 +81,23 @@ void AlienComponent::RegularBombRun()
 
 void AlienComponent::Return()
 {
+	auto pos{ m_pParent->GetTransform()->GetWorldPosition() };
+
+	const float maxY{ 600.f };
+	
+	if(pos.y >= maxY)
+	{
+		m_pParent->GetTransform()->Translate({ 0.f, -maxY, 0.f });
+		pos.y -= maxY;
+		auto direction{ m_StartPos - pos };
+		const float magnitude{ sqrtf(powf(direction.x, 2) + powf(direction.y, 2) + powf(direction.z, 2)) };
+		direction /= magnitude;
+
+		auto* pActorComp{ m_pParent->GetComponent<ActorComponent>() };
+		direction *= pActorComp->GetMaxSpeed();
+
+		pActorComp->SetVelocity(direction.x, direction.y);
+
+		m_IsReturning = true;
+	}
 }
