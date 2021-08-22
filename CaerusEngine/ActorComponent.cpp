@@ -16,3 +16,9 @@ void ActorComponent::AddVelocity(float x, float y)
 	m_Velocity.x += x;
 	m_Velocity.y += y;
 }
+
+void ActorComponent::SetVelocity(float x, float y)
+{
+	m_Velocity.x = x;
+	m_Velocity.y = y;
+}

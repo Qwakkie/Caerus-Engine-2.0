@@ -16,6 +16,7 @@ public:
 	void Update(float)override;
 
 	void AddVelocity(float x, float y);
+	void SetVelocity(float x, float y);
 	float GetMaxSpeed()const { return m_MaxSpeed; }
 private:
 	glm::vec2 m_Velocity{};

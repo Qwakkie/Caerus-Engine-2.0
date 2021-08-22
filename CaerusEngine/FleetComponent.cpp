@@ -13,6 +13,8 @@ void FleetComponent::Update(float deltaTime)
 	{
 		m_ElapsedTime = 0.f;
 		auto* pAlien{ SelectAlien() };
+		if (!pAlien)
+			return;
 		pAlien->GetComponent<AlienComponent>()->StartBombing();
 	}
 }
@@ -39,31 +41,65 @@ GameObject* FleetComponent::SelectAlien()
 	
 	GameObject* pSelected{};
 
-	while (!pSelected)
+	const int random{ RandomNumberGenerator::GetRandomInt(0, 100) };
+	const bool selectRight{ static_cast<bool>(random % 2) };
+
+	if (random <= bossOdds)
+		tag = "Boss";
+	else if (random <= bossOdds + zakoOdds)
+		tag = "Zako";
+	else
+		tag = "Goei";
+
+	pSelected = FindAlienOfType(tag, selectRight);
+
+	if(!pSelected)
 	{
-		const int random{ RandomNumberGenerator::GetRandomInt(0, 100) };
-		const bool selectRight{ static_cast<bool>(random % 2) };
-
-		if (random <= bossOdds)
-			tag = "Boss";
-		else if (random <= bossOdds + zakoOdds)
-			tag = "Zako";
-		else
-			tag = "Goei";
-
-		for (auto* pAlien : m_pAliens)
+		if(tag == "Boss")
 		{
-			if (!pAlien)
-				continue;
-			if (pAlien->CompareTag(tag))
+			pSelected = FindAlienOfType("Zako", selectRight);
+			if(!pSelected)
 			{
-				if (!pSelected ||
-					((((pAlien->GetTransform()->GetWorldPosition().x < pSelected->GetTransform()->GetWorldPosition().x) ^ selectRight) ||
-						pAlien->GetTransform()->GetWorldPosition().y > pSelected->GetTransform()->GetWorldPosition().y) &&
-						!pAlien->GetComponent<AlienComponent>()->IsBombing()))
-				{
-					pSelected = pAlien;
-				}
+				pSelected = FindAlienOfType("Goei", selectRight);
+			}
+		}
+		else if(tag == "Goei")
+		{
+			pSelected = FindAlienOfType("Zako", selectRight);
+			if (!pSelected)
+			{
+				pSelected = FindAlienOfType("Boss", selectRight);
+			}
+		}
+		else
+		{
+			pSelected = FindAlienOfType("Goei", selectRight);
+			if(!pSelected)
+			{
+				pSelected = FindAlienOfType("Boss", selectRight);
+			}
+		}
+	}
+
+	return pSelected;
+}
+
+GameObject* FleetComponent::FindAlienOfType(const std::string& tag, bool selectRight)
+{
+	GameObject* pSelected{};
+
+	for (auto* pAlien : m_pAliens)
+	{
+		if (!pAlien)
+			continue;
+		if (pAlien->CompareTag(tag))
+		{
+			if (!pSelected ||
+				((((pAlien->GetTransform()->GetWorldPosition().x < pSelected->GetTransform()->GetWorldPosition().x) ^ selectRight) ||
+					pAlien->GetTransform()->GetWorldPosition().y > pSelected->GetTransform()->GetWorldPosition().y) &&
+					!pAlien->GetComponent<AlienComponent>()->IsBombing()))
+			{
+				pSelected = pAlien;
 			}
 		}
 	}

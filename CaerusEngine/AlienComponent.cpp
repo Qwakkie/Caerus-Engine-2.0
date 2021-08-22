@@ -25,7 +25,7 @@ void AlienComponent::Update(float)
 	auto* pActorComp{ m_pParent->GetComponent<ActorComponent>() };
 	direction *= pActorComp->GetMaxSpeed();
 	
-	pActorComp->AddVelocity(direction.x, direction.y);
+	pActorComp->SetVelocity(direction.x, direction.y);
 }
 
 bool AlienComponent::IsBombing()
