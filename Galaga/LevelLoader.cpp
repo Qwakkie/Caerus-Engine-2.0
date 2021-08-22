@@ -3,8 +3,6 @@
 
 #include <fstream>
 
-
-
 #include "AnimatorComponent.h"
 #include "BinaryReader.h"
 #include "BossFactory.h"
@@ -36,12 +34,12 @@ enum InputMeaning
 	Boss = 3
 };
 
-Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::string& name)
+Scene* LevelLoader::LoadLevelFromFile(const std::string& filePath, const std::string& name, GameObject* pPlayer)
 {
 	m_pScene = new Scene(name);
 
 	auto* pFleetObject{ new GameObject() };
-	auto* pFleet{ new FleetComponent() };
+	auto* pFleet{ new FleetComponent(pPlayer) };
 	pFleetObject->AddComponent(pFleet);
 	m_pScene->Add(pFleetObject);
 

@@ -6,6 +6,11 @@
 #include "RandomNumberGenerator.h"
 #include "TransformComponent.h"
 
+FleetComponent::FleetComponent(GameObject* pPlayer)
+	:m_pPlayer(pPlayer)
+{
+}
+
 void FleetComponent::Update(float deltaTime)
 {
 	m_ElapsedTime += deltaTime;
@@ -15,7 +20,7 @@ void FleetComponent::Update(float deltaTime)
 		auto* pAlien{ SelectAlien() };
 		if (!pAlien)
 			return;
-		pAlien->GetComponent<AlienComponent>()->StartBombing();
+		pAlien->GetComponent<AlienComponent>()->StartBombing(m_pPlayer);
 	}
 }
 

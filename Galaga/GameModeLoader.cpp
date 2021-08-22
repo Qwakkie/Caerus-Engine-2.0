@@ -104,13 +104,14 @@ void GameModeLoader::LoadGameOver()
 void GameModeLoader::LoadSingleplayer()
 {
 	auto* pScoreboard{ new Scoreboard() };
+	
+	auto* pPlayer{ new GameObject() };
 
 	LevelLoader loader{ pScoreboard };
 	const std::string levelName{ "Level 1" };
-	auto* pScene{ loader.LoadLevelFromFile("../Resources/Level1.dat", "Level 1") };
+	auto* pScene{ loader.LoadLevelFromFile("../Resources/Level1.dat", "Level 1", pPlayer) };
 	pScene->Add(pScoreboard->GetView());
 
-	auto* pPlayer{ new GameObject() };
 
 	auto* pTexture{ new TextureComponent("../Resources/Player.png") };
 	pPlayer->AddComponent(pTexture);

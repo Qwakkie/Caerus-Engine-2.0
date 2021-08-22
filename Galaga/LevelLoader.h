@@ -12,7 +12,7 @@ class LevelLoader
 public:
 	LevelLoader(Scoreboard*);
 	~LevelLoader();
-	Scene* LoadLevelFromFile(const std::string& filePath, const std::string& name);
+	Scene* LoadLevelFromFile(const std::string& filePath, const std::string& name, GameObject* pPlayer);
 private:
 	Scoreboard* m_pScoreboard;
 	BinaryReader* m_pReader;
